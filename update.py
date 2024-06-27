@@ -1,9 +1,13 @@
 import sys
 import pandas as pd
 import random
+from geoip import GeoIP
+
+g =  GeoIP('./GeoLite2-Country.mmdb')
 
 def turn_data(ip):
-    return f'{ip}:443#JP-CF-{ip}'
+    country = g.lookup(ip)
+    return f'{ip}:443#{country}-CF-{ip}'
 
 def main():
     if len(sys.argv) != 3:
@@ -31,6 +35,7 @@ def main():
             for address in ipports[i * k: (i + 1) * k]:
                 f.write(address + '\n')
         print(f"{outname} 写入 {k} 个节点")
+    g.close()
 
 if __name__ == "__main__":
     main()
