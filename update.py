@@ -3,7 +3,7 @@ import pandas as pd
 import random
 
 def turn_data(ip):
-    return f'{ip}:443#JP'
+    return f'{ip}:443#JP-CF-{ip}'
 
 def main():
     if len(sys.argv) != 3:
